@@ -1,0 +1,5 @@
+# Place all the behaviors and hooks related to the matching controller here.
+# All this logic will automatically be available in application.js.
+# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+
+tinyMCE.init({"selector":"textarea.tinymce","theme_advanced_toolbar_location":"top","theme_advanced_toolbar_align":"left","theme_advanced_statusbar_location":"bottom","theme_advanced_buttons3_add":"tablecontrols,fullscreen","theme_advanced_font_sizes":"8=8px,10=10px,12=12px,14=14px,16=16px,18=18px,20=20px,22=22px,24=24px,26=26px,28=28px,30=30px,32=32px,34=34px,36=36px,38=38px,40=40px,42=42px,44=44px,46=46px,48=48px,50=50px,52=52px,54=54px,56=56px,58=58px,60=60px,62=62px,64=64px,66=66px,68=68px,70=70px,72=72px,74=74px,76=76px,78=78px,80=80px","plugins":"table,fullscreen"});

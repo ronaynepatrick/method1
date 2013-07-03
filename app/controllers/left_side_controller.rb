@@ -1,0 +1,2 @@
+class LeftSideController < ApplicationController
+end

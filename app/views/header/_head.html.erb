@@ -1,0 +1,36 @@
+<h1> header </h1>
+<nav class="top-bar">
+  <section class="top-bar-section">
+    <!-- Left Nav Section -->
+    <ul class="left">
+    	<li class="has-form">
+        <%= form_tag "search" do %>
+          <div class="row collapse">
+            <div class="small-8 columns">
+              <input id="search_q" type="text">
+            </div>
+            <div class="small-4 columns">
+              <!--<a href="#" class="alert button">Search</a>-->
+              <div class = "alert"><%= submit_tag("Search") %></div>
+            </div>
+          </div>
+        <% end %>
+      </li>
+      <li class="divider"></li>
+    </ul>
+
+    <!-- Right Nav Section -->
+    <ul class="right">
+      <li class="divider hide-for-small"></li>
+      <li class="has-dropdown"><a href="">Action</a>
+        <ul class="dropdown">
+         <!-- <li><label>Dropdown Level 1 Label</label></li> -->
+          <%= render partial: 'header/actions', locals: {permission: user.permission} %>
+          <li class="divider"></li>
+          <li><a href="logout">Logout</a></li>
+        </ul>
+      </li>
+      <li class="divider"></li>
+    </ul>
+  </section>
+</nav>
