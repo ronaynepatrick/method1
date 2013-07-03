@@ -1,0 +1,12 @@
+<%= render partial: 'header/head', locals: {user: current_user} %>
+
+<h1><%= @page.title %> </h1>
+<% if @content.to_a.count == 0 %>
+	<%= button_to "Add Passage", :action => :new_passage %>
+<% end %>
+
+<% @content.to_a.each do |c| %>
+	<%= c.class.name %>
+	<%= button_to "Edit", :action => :edit_passage %>
+	<%= button_to "Add Passage", :action => :new_passage %>
+<% end %>

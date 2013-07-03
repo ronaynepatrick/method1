@@ -1,0 +1,2 @@
+module PageCreatorHelper
+end
