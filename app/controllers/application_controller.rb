@@ -76,4 +76,14 @@ class ApplicationController < ActionController::Base
       redirect_to(session[:return_to] || default)
       session[:return_to] = nil
     end
+
+# -->> other apis
+    # def load_content
+    #   passages = Passage.where(page_id: session[:page_id])
+    #   videos = Video.where(page_id: session[:page_id])
+    #   docs = Document.where(page_id: session[:page_id])
+    #   pics = Pic.where(page_id: session[:page_id])
+    #   @content = passages+videos+docs+pics
+    #   return @content
+    # end
 end 

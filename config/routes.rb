@@ -19,12 +19,17 @@ Method1::Application.routes.draw do
 
   match 'home_page' => "home_page#load", :as => :home_page
   match 'search' => "header#search", :as => :search
+
+  #page_creator stuff
   match 'create_page' => "page_creator#new", :as => :create_page
   match 'save_page' => "page_creator#save_new", :as => :save_new
   match 'edit_page' => "page_creator#edit_page", :as => :edit_page
   match 'new_passage' => "page_creator#new_passage", :as => :new_passage
   match 'edit_passage' => "page_creator#edit_passage", :as => :edit_passage
   match 'save_passage' => "page_creator#save_passage", :as => :save_passage
+  match 'move_up' => "page_creator#move_up", :as => :move_up
+  match 'move_down' => "page_creator#move_down", :as => :move_down
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
