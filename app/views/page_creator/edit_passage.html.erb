@@ -1,3 +1,5 @@
-<%= form_tag "home_page" do%>
-
+<%= @passage_id %>
+<%= form_tag :save_passage do%>
+	<%= cktext_area :passage, :text, :value=>@pass_edit.passage, :ckeditor => {:uiColor => "#AADC6E", :toolbar => "mini" } %>
+	<%= submit_tag("Save Changes") %>
 <% end %>

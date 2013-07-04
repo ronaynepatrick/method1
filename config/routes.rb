@@ -1,5 +1,7 @@
 Method1::Application.routes.draw do
 
+  mount Ckeditor::Engine => '/ckeditor'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
  #config/routes.rb
@@ -22,6 +24,7 @@ Method1::Application.routes.draw do
   match 'edit_page' => "page_creator#edit_page", :as => :edit_page
   match 'new_passage' => "page_creator#new_passage", :as => :new_passage
   match 'edit_passage' => "page_creator#edit_passage", :as => :edit_passage
+  match 'save_passage' => "page_creator#save_passage", :as => :save_passage
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

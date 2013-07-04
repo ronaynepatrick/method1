@@ -14,22 +14,36 @@ class PageCreatorController < ApplicationController
 
 	def new_passage
 		passage = Passage.new
+		passage.page_id=session[:page_id]
+		passage.position=params[:order]
 		passage.save
-		session[:passage] = passage.id
+		session[:p_id] = passage.id
 		redirect_to :edit_passage
 	end	
 
 	def edit_passage
-		@p_id = session[:passage]
-		@passage
+		@passage_id = session[:p_id]
+		@pass_edit = Passage.find(session[:p_id])
+		if @pass_edit.passage == nil
+			@pass_edit.passage = "Enter text here"
+			@pass_edit.save
+		end
 	end
 
 	def save_passage
-		# @passage = Passage.new(params[:passage])
-		passage.passage = params[:passage]
-		passage.save
-		session[:passage] = nil
+		pass_edit = Passage.find(session[:p_id])
+		pass_edit.passage = params[:passage][:text]
+		pass_edit.save
+		session[:p_id] = nil
 		redirect_to :edit_page
+	end
+
+	def move_up
+		
+	end
+
+	def move_down
+
 	end
 
 	def edit_page
@@ -38,6 +52,6 @@ class PageCreatorController < ApplicationController
 		videos = Video.where(page_id: session[:page_id])
 		docs = Document.where(page_id: session[:page_id])
 		pics = Pic.where(page_id: session[:page_id])
-		@content = passages+videos+docs #+pics
+		@content = passages+videos+docs+pics
 	end
 end
