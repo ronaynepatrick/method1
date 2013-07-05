@@ -38,6 +38,13 @@
 					</div>
 
 					<div class="large-2 columns">
+						<%= form_tag :delete_passage do %>
+							<%= hidden_field_tag :p_id, c.id %>
+							<%= submit_tag("Remove") %>
+						<% end %>
+					</div>
+
+					<div class="large-2 columns">
 						<% if $i != 0 %>
 							<%= form_tag :move_up do %>
 								<%= hidden_field_tag :current_position, c.position %>

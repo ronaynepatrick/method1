@@ -29,6 +29,7 @@ Method1::Application.routes.draw do
   match 'save_passage' => "page_creator#save_passage", :as => :save_passage
   match 'move_up' => "page_creator#move_up", :as => :move_up
   match 'move_down' => "page_creator#move_down", :as => :move_down
+  match 'delete_passage' => "page_creator#delete_passage", :as => :delete_passage
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

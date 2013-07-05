@@ -24,11 +24,12 @@ class PageCreatorController < ApplicationController
 		session[:content] = @content
 	end
 
+#Passage editing functions
 	def new_passage
 		passage = Passage.new
 		passage.page_id=session[:page_id]
 		passage.position=params[:current_position]
-		passage.line = 0
+		passage.linebreak = 0
 		passage.save
 
 		session[:p_id] = passage.id
@@ -41,7 +42,7 @@ class PageCreatorController < ApplicationController
 		pics = Pic.where(page_id: session[:page_id])
 		content = passages+videos+docs+pics
 
-		session[:content] = @content
+		session[:content] = content
 
 		redirect_to :edit_passage
 	end	
@@ -51,7 +52,6 @@ class PageCreatorController < ApplicationController
 			session[:p_id] = params[:p_id]
 		end
 		@pass_edit = Passage.find(session[:p_id])
-		# @pass_edit = Passage.find(12)
 		if @pass_edit.passage == nil
 			@pass_edit.passage = ""
 			@pass_edit.save
@@ -68,6 +68,22 @@ class PageCreatorController < ApplicationController
 		
 		redirect_to :move_up
 		# redirect_to :edit_page
+	end
+
+	def delete_passage
+		to_delete = Passage.find(params[:p_id])
+
+		content = session[:content] 
+		
+		content.each do |c|
+			if c.position > to_delete.position
+				c.position -= 1
+				c.save
+			end
+		end
+		to_delete.destroy
+
+		redirect_to :edit_page
 	end
 
 

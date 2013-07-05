@@ -1,7 +1,7 @@
 <%= render partial: 'header/head', locals: {user: current_user} %>
 <%= render partial: 'left_side/left_nav' %>
-<%= current_user.class.name %>
 <%= form_for @page, :as => :page, url: {action: "save_new"} do |f| %>
+  Title:<br>
   <%= f.text_field :title %> 
   <%= f.hidden_field :user_id, :value => current_user.id  %>
   <%= f.submit "Create" %>
