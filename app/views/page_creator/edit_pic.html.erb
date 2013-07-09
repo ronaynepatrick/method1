@@ -1,0 +1,7 @@
+<%= form_tag :save_picture, :html => { :enctype => "multipart/form-data" } do%>
+	select picture: <%= file_field_tag 'photo' %> <br>
+	add line break:  <%= check_box_tag 'line' %> <br>
+	position: <%= radio_button_tag 'side', 1 %>left
+	<%= radio_button_tag 'side', 2 %>center
+	<%= radio_button_tag 'side', 3 %>right
+<% end %>

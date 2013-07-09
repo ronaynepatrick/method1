@@ -6,6 +6,8 @@ class CreatePics < ActiveRecord::Migration
     	t.string :title
     	t.string :url
     	t.integer :page_id
+      t.integer :def_size
+      t.integer :side
       t.timestamps
     end
   end

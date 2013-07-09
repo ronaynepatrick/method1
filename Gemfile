@@ -7,8 +7,7 @@ gem 'sunspot_solr'
 gem 'sunspot_cell', :git => 'git://github.com/zheileman/sunspot_cell.git'
 gem "paperclip"
 gem 'compass-rails'
-
-# gem 'rmagick', '2.13.2', :require => 'RMagick'
+gem 'mini_magick', :git => 'git://github.com/minimagick/minimagick.git', :ref => '6d0f8f953112cce6324a524d76c7e126ee14f392'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

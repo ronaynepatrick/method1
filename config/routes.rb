@@ -30,7 +30,9 @@ Method1::Application.routes.draw do
   match 'move_up' => "page_creator#move_up", :as => :move_up
   match 'move_down' => "page_creator#move_down", :as => :move_down
   match 'delete_passage' => "page_creator#delete_passage", :as => :delete_passage
-
+  match 'new_pic' => "page_creator#new_pic", :as => :new_pic
+  match 'edit_pic' => "page_creator#edit_pic", :as => :edit_pic
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

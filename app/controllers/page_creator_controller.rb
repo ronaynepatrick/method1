@@ -15,6 +15,10 @@ class PageCreatorController < ApplicationController
 	end
 
 	def edit_page
+		if params[:page_id] != nil
+			session[:page_id] = params[:page_id]
+		end
+
 		@page = Page.find(session[:page_id])
 		passages = Passage.where(page_id: session[:page_id])
 		videos = Video.where(page_id: session[:page_id])
@@ -86,6 +90,65 @@ class PageCreatorController < ApplicationController
 		redirect_to :edit_page
 	end
 
+
+# Picture Editing Functions
+
+	def new_pic
+		pic = Pic.new
+		pic.page_id = session[:page_id]
+		pic.def_size = 1
+	 	pic.side = 0
+	 	pic.save
+
+	 	session[:pic_id] = pic.id
+	 	session[:current_position] = params[:current_position]
+		session[:move_to] = params[:move_to]
+
+		passages = Passage.where(page_id: session[:page_id])
+		videos = Video.where(page_id: session[:page_id])
+		docs = Document.where(page_id: session[:page_id])
+		pics = Pic.where(page_id: session[:page_id])
+		content = passages+videos+docs+pics
+
+		session[:content] = content
+
+		redirect_to :edit_pic
+	end
+
+	def edit_pic
+		if session[:pic_id] == nil
+			session[:pic_id] = params[:pic_id]
+		end
+		@picture = Pic.find(session[:pic_id])
+	end
+
+	def save_pic
+		picture = Pic.find(session[:pic_id])
+		picture.photo = params[:photo]
+		picture.def_size = params[:def_size]
+		picture.side = params[:side]
+		picture.linebreak = params[:line]
+		# picture = Pic.new(params[:picture])
+
+		session[:pic_id] = nil
+		
+		redirect_to :move_up
+	end
+
+	def delete_pic
+		to_delete = Pic.find(params[:pic_id])
+
+		content = session[:content] 
+		content.each do |c|
+			if c.position > to_delete.position
+				c.position -= 1
+				c.save
+			end
+		end
+		to_delete.destroy
+
+		redirect_to :edit_page
+	end
 
 # GENERAL EDITING METHODS
 	def move_up
