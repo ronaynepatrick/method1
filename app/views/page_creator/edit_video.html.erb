@@ -1,0 +1,7 @@
+<%= form_tag :save_video, :enctype =>"multipart/form-data"  do%>
+	select video: <%= file_field_tag 'vid', :multiple => true %> <br>
+	add line break:  <%= check_box_tag 'line' %> <br>
+	short description: <%= text_field_tag 'description', @video.description %><br>
+	show decription: <%= check_box_tag 'show_desc' %><br>
+	<%= submit_tag("Save Changes") %>
+<% end %>

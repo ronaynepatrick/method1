@@ -39,4 +39,11 @@
 			<%= submit_tag("Add Picture") %>
 		<% end %>
 	</div>
+	<div class="large-2 columns">
+		<%= form_tag :new_video do %>
+			<%= hidden_field_tag :current_position, size %>
+			<%= hidden_field_tag :move_to, c.position+1 %>
+			<%= submit_tag("Add Video") %>
+		<% end %>
+	</div>
 </div>

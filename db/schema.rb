@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130710154123) do
+ActiveRecord::Schema.define(:version => 20130710200250) do
 
   create_table "ckeditor_assets", :force => true do |t|
     t.string   "data_file_name",                  :null => false
@@ -41,6 +41,9 @@ ActiveRecord::Schema.define(:version => 20130710154123) do
     t.string   "doc_content_type"
     t.integer  "doc_file_size"
     t.datetime "doc_updated_at"
+    t.integer  "indent"
+    t.integer  "show_desc"
+    t.string   "description"
   end
 
   create_table "pages", :force => true do |t|
@@ -130,8 +133,14 @@ ActiveRecord::Schema.define(:version => 20130710154123) do
     t.string   "title"
     t.string   "url"
     t.integer  "page_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.string   "description"
+    t.string   "show_desc"
+    t.string   "vid_file_name"
+    t.string   "vid_content_type"
+    t.integer  "vid_file_size"
+    t.datetime "vid_updated_at"
   end
 
 end

@@ -215,6 +215,64 @@ class PageCreatorController < ApplicationController
 		redirect_to :edit_page
 	end
 
+# Movie Editing Options
+	def new_video
+		video = Video.new
+		video.page_id = session[:page_id]
+		video.position = params[:current_position]
+		video.save
+
+		session[:vid_id] = video.id
+	 	session[:current_position] = params[:current_position]
+		session[:move_to] = params[:move_to]
+
+		passages = Passage.where(page_id: session[:page_id])
+		videos = Video.where(page_id: session[:page_id])
+		docs = Document.where(page_id: session[:page_id])
+		pics = Pic.where(page_id: session[:page_id])
+		content = passages+videos+docs+pics
+
+		session[:content] = content
+		redirect_to :edit_document
+	end	
+
+	def edit_video
+		if session[:vid_id] == nil
+			session[:vid_id] = params[:vid_id]
+		end
+		@video = Video.find(session[:vid_id])
+	end
+
+	def save_video
+		video = Video.find(session[:vid_id])
+		if params[:vid] != nil
+			video.vid = params[:vid]
+		end
+		video.linebreak = params[:line]
+		video.description = params[:description]
+		video.show_desc = params[:show_desc]
+		video.save
+
+		session[:vid_id] = nil
+
+		redirect_to :move_up
+	end
+
+	def delete_video
+		to_delete = Video.find(params[:vid_id])
+
+		content = session[:content] 
+		content.each do |c|
+			if c.position > to_delete.position
+				c.position -= 1
+				c.save
+			end
+		end
+		to_delete.destroy
+
+		redirect_to :edit_page
+	end
+
 # GENERAL EDITING METHODS
 	def move_up
 		if session[:current_position] == nil

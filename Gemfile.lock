@@ -62,7 +62,7 @@ GEM
     coffee-script (2.2.0)
       coffee-script-source
       execjs
-    coffee-script-source (1.6.2)
+    coffee-script-source (1.6.3)
     compass (0.12.2)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
@@ -83,13 +83,13 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    mediaelement_rails (0.5.1)
+      jquery-rails (>= 1.0)
+      railties (>= 3.1)
     mime-types (1.23)
-    mini_portile (0.5.0)
+    mini_portile (0.5.1)
     multi_json (1.7.7)
-    mysql2 (0.3.11)
     mysql2 (0.3.11-x86-mingw32)
-    nokogiri (1.6.0)
-      mini_portile (~> 0.5.0)
     nokogiri (1.6.0-x86-mingw32)
       mini_portile (~> 0.5.0)
     orm_adapter (0.4.0)
@@ -99,7 +99,6 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.0)
       mime-types
-    pg (0.12.2)
     pg (0.12.2-x86-mingw32)
     polyglot (0.3.3)
     pr_geohash (1.0.0)
@@ -169,6 +168,7 @@ DEPENDENCIES
   coffee-rails (= 3.2.2)
   compass-rails
   jquery-rails (= 2.0.2)
+  mediaelement_rails
   mini_magick!
   mysql2
   paperclip

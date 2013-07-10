@@ -38,6 +38,10 @@ Method1::Application.routes.draw do
   match 'edit_document' => "page_creator#edit_document", :as => :edit_document
   match 'save_document' => "page_creator#save_document", :as => :save_document
   match "delete_document" => "page_creator#delete_document", :as => :delete_document
+  match 'new_video' => "page_creator#new_video", :as => :new_video
+  match 'edit_video' => "page_creator#edit_video", :as => :edit_video
+  match 'save_video' => "page_creator#save_video", :as => :save_video
+  match "delete_video" => "page_creator#delete_video", :as => :delete_video
 
   #other links
   get 'pics/:id', to: "image#show", as: "pic"
