@@ -4,12 +4,23 @@
 <% $i=0 %>
 
 <h1><%= @page.title %> </h1>
+
+page ID: <%= @page.id %><br>
 <% if @content.to_a.count == 0 %>
 	<%= form_tag :new_passage do %>
 		<%= hidden_field_tag :move_to, $i  %>
 		<%= hidden_field_tag :current_position, 0 %>
-
 		<%= submit_tag("Add Passage") %>
+	<% end %>
+	<%= form_tag :new_pic do %>
+		<%= hidden_field_tag :current_position, 0 %>
+		<%= hidden_field_tag :move_to, $i %>
+		<%= submit_tag("Add Picture") %>
+	<% end %>
+	<%= form_tag :new_document do %>
+		<%= hidden_field_tag :move_to, $i  %>
+		<%= hidden_field_tag :current_position, 0 %>
+		<%= submit_tag("Add Document") %>
 	<% end %>
 <% end %>
 
@@ -19,8 +30,6 @@
 	<% @content.to_a.each do |c| %>
 
 		<% if c.position == $i %>
-			
-
 
 <!-- -----------------------------                  if is a passage                   ----------------------------------------- -->
 			<% if c.class.name == "Passage" %>
@@ -30,56 +39,112 @@
 				<%= c.passage.html_safe %>
 				
 				<div class="row">
-					<div class="large-2 columns">
+					<div class="large-1 columns">
 						<%= form_tag :edit_passage do %>
 							<%= hidden_field_tag :p_id, c.id %>
 							<%= submit_tag("Edit") %>
 						<% end %>
 					</div>
 
-					<div class="large-2 columns">
+					<div class="large-1 columns">
 						<%= form_tag :delete_passage do %>
 							<%= hidden_field_tag :p_id, c.id %>
 							<%= submit_tag("Remove") %>
 						<% end %>
 					</div>
 
-					<div class="large-2 columns">
-						<% if $i != 0 %>
-							<%= form_tag :move_up do %>
-								<%= hidden_field_tag :current_position, c.position %>
-								<%= hidden_field_tag :move_to, c.position-1 %>
-								<%= submit_tag("  ^  ") %>
-							<% end %>
-						<% end %>
-					</div>
+				<%= render partial: "buttons", locals: {c: c, size: @content.to_a.count} %>
 
-					<div class="large-2 columns">
-						<% if $i != @content.to_a.count-1 %>
-							<%= form_tag :move_down do %>
-								<%= hidden_field_tag :current_position, c.position %>
-								<%= hidden_field_tag :move_to, c.position+1 %>
-								<%= submit_tag("  v  ") %>
-							<% end %>
-						<% end %>
-					</div>
-					
-					<div class="large-2 columns">
-						<%= form_tag :new_passage do %>
-							<%= hidden_field_tag :current_position, @content.to_a.count %>
-							<%= hidden_field_tag :move_to, c.position+1 %>
-							<%= submit_tag("Add Passage") %>
-						<% end %>
-					</div>
+<!--     ------------------------       For Pictures           -------------------------------------- -->
+			<% elsif c.class.name == "Pic" %>
+				<% if c.linebreak %>
+					<HR SIZE="2">
+				<% end %>
+				
+				<% if c.side == 3 %>
+					<div style= "float: right">
+				<% elsif c.side == 2 && c.def_size == 1 %>
+					<div style= "height:auto;width:100px; position:relative;margin: 0 auto;">
+				<% elsif c.side == 2 && c.def_size == 2 %>
+					<div style= "height:auto;width:400px; position:relative;margin: 0 auto;">
+				<% elsif c.side == 2 && c.def_size == 3 %>
+					<div style= "height:auto;width:600px; position:relative;margin: 0 auto;">
+				<% else %>
+					<div>
+				<% end %>
 
+				<% if c.def_size == 1 %>
+					<%= link_to image_tag(c.photo.url(:small)), pic_path(c)%>
+				<% elsif c.def_size == 2 %>
+					<%= link_to image_tag(c.photo.url(:medium)),  pic_path(c) %>
+				<% elsif c.def_size == 3 %>
+					<%= link_to image_tag(c.photo.url(:large)), pic_path(c) %>
+				<% end %>
+				<% if c.show_desc %>
+					<br>
+					<div style="font-style:italic"><%= c.description %></div>
+				<% end %>
 				</div>
 
+				<div class="row">
+					<div class="large-1 columns">
+						<%= form_tag :edit_pic do %>
+							<%= hidden_field_tag :pic_id, c.id %>
+							<%= submit_tag("Edit") %>
+						<% end %>
+					</div>
+
+					<div class="large-1 columns">
+						<%= form_tag :delete_pic do %>
+							<%= hidden_field_tag :pic_id, c.id %>
+							<%= submit_tag("Remove") %>
+						<% end %>
+					</div>
+
+				<%= render partial: "buttons", locals: {c: c, size: @content.to_a.count} %>
+			
+			<% elsif c.class.name == "Document" %>
+				<% if c.linebreak %>
+					<HR SIZE="2">
+				<% end %>
+
+				<% if c.indent %>
+					<ul class="disc">
+						<li><%= link_to c.title, c.doc.url %>
+							<% if c.show_desc %>
+								 -<%= c.description %>
+							<% end %> 
+						</li>
+					</ul>
+				<% else %>
+					<%= link_to c.title, c.doc.url %>
+					<% if c.show_desc %>
+						 -<%= c.description %>
+					<% end %> 
+				<% end %>
+
+
+				<div class="row">
+					<div class="large-1 columns">
+						<%= form_tag :edit_document do %>
+							<%= hidden_field_tag :doc_id, c.id %>
+							<%= submit_tag("Edit") %>
+						<% end %>
+					</div>
+
+					<div class="large-1 columns">
+						<%= form_tag :delete_document do %>
+							<%= hidden_field_tag :doc_id, c.id %>
+							<%= submit_tag("Remove") %>
+						<% end %>
+					</div>
+
+				<%= render partial: "buttons", locals: {c: c, size: @content.to_a.count} %>
 			<% end %>
-<!--     -------------------------------------------------------------------------------------------- -->
+
 			<% break %>
 		<% end %>
 
 	<% end %>
-
 	<% $i += 1 %>
 <% end %>

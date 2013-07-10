@@ -32,7 +32,16 @@ Method1::Application.routes.draw do
   match 'delete_passage' => "page_creator#delete_passage", :as => :delete_passage
   match 'new_pic' => "page_creator#new_pic", :as => :new_pic
   match 'edit_pic' => "page_creator#edit_pic", :as => :edit_pic
-  
+  match 'save_pic' => "page_creator#save_pic", :as => :save_pic
+  match 'delete_pic' => "page_creator#delete_pic", :as => :delete_pic
+  match 'new_document' => "page_creator#new_document", :as => :new_document
+  match 'edit_document' => "page_creator#edit_document", :as => :edit_document
+  match 'save_document' => "page_creator#save_document", :as => :save_document
+  match "delete_document" => "page_creator#delete_document", :as => :delete_document
+
+  #other links
+  get 'pics/:id', to: "image#show", as: "pic"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

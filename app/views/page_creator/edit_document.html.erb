@@ -1,0 +1,9 @@
+<%= form_tag :save_document, :enctype =>"multipart/form-data"  do%>
+	name: <%= text_field_tag 'title', @document.title %>
+	select document: <%= file_field_tag 'doc', :multiple => true %> <br>
+	add line break:  <%= check_box_tag 'line' %> <br>
+	indent <%= check_box_tag 'indent' %> <br>
+	short description: <%= text_field_tag 'description', @document.description %><br>
+	show decription: <%= check_box_tag 'show_desc' %><br>
+	<%= submit_tag("Save Changes") %>
+<% end %>

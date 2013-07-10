@@ -1,0 +1,42 @@
+	<div class="large-1 columns">
+		<% if $i != 0 %>
+			<%= form_tag :move_up do %>
+				<%= hidden_field_tag :current_position, c.position %>
+				<%= hidden_field_tag :move_to, c.position-1 %>
+				<%= submit_tag("  ^  ") %>
+			<% end %>
+		<% end %>
+	</div>
+
+	<div class="large-1 columns">
+		<% if $i != @content.to_a.count-1 %>
+			<%= form_tag :move_down do %>
+				<%= hidden_field_tag :current_position, c.position %>
+				<%= hidden_field_tag :move_to, c.position+1 %>
+				<%= submit_tag("  v  ") %>
+			<% end %>
+		<% end %>
+	</div>
+	
+	<div class="large-2 columns">
+		<%= form_tag :new_passage do %>
+			<%= hidden_field_tag :current_position, size %>
+			<%= hidden_field_tag :move_to, c.position+1 %>
+			<%= submit_tag("Add Passage") %>
+		<% end %>
+	</div>
+	<div class="large-2 columns">
+		<%= form_tag :new_document do %>
+			<%= hidden_field_tag :current_position, size %>
+			<%= hidden_field_tag :move_to, c.position+1 %>
+			<%= submit_tag("Add Document") %>
+		<% end %>
+	</div>
+	<div class="large-2 columns">
+		<%= form_tag :new_pic do %>
+			<%= hidden_field_tag :current_position, size %>
+			<%= hidden_field_tag :move_to, c.position+1 %>
+			<%= submit_tag("Add Picture") %>
+		<% end %>
+	</div>
+</div>

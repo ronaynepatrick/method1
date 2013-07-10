@@ -98,6 +98,8 @@ class PageCreatorController < ApplicationController
 		pic.page_id = session[:page_id]
 		pic.def_size = 1
 	 	pic.side = 0
+	 	pic.position = params[:current_position]
+	 	pic.linebreak = 0
 	 	pic.save
 
 	 	session[:pic_id] = pic.id
@@ -124,11 +126,15 @@ class PageCreatorController < ApplicationController
 
 	def save_pic
 		picture = Pic.find(session[:pic_id])
-		picture.photo = params[:photo]
+		if params[:photo] != nil
+			picture.photo = params[:photo]
+		end
 		picture.def_size = params[:def_size]
 		picture.side = params[:side]
 		picture.linebreak = params[:line]
-		# picture = Pic.new(params[:picture])
+		picture.description = params[:description]
+		picture.show_desc = params[:show_desc]
+		picture.save
 
 		session[:pic_id] = nil
 		
@@ -137,6 +143,65 @@ class PageCreatorController < ApplicationController
 
 	def delete_pic
 		to_delete = Pic.find(params[:pic_id])
+
+		content = session[:content] 
+		content.each do |c|
+			if c.position > to_delete.position
+				c.position -= 1
+				c.save
+			end
+		end
+		to_delete.destroy
+
+		redirect_to :edit_page
+	end
+
+# Document Editing Options
+	def new_document
+		document = Document.new
+		document.title = "Untitled"
+		document.page_id = session[:page_id]
+		document.position = params[:current_position]
+		document.save
+
+		session[:doc_id] = document.id
+	 	session[:current_position] = params[:current_position]
+		session[:move_to] = params[:move_to]
+
+		passages = Passage.where(page_id: session[:page_id])
+		videos = Video.where(page_id: session[:page_id])
+		docs = Document.where(page_id: session[:page_id])
+		pics = Pic.where(page_id: session[:page_id])
+		content = passages+videos+docs+pics
+
+		session[:content] = content
+		redirect_to :edit_document
+	end	
+
+	def edit_document
+		if session[:doc_id] == nil
+			session[:doc_id] = params[:doc_id]
+		end
+		@document = Document.find(session[:doc_id])
+	end
+
+	def save_document
+		document = Document.find(session[:doc_id])
+		if params[:doc] != nil
+			document.doc = params[:doc]
+		end
+		document.title = params[:title]
+		document.linebreak = params[:line]
+		document.indent = params[:indent]
+		document.description = params[:description]
+		document.show_desc = params[:show_desc]
+		document.save
+
+		redirect_to :move_up
+	end
+
+	def delete_document
+		to_delete = Document.find(params[:doc_id])
 
 		content = session[:content] 
 		content.each do |c|

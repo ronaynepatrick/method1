@@ -1,7 +1,15 @@
-<%= form_tag :save_picture, :html => { :enctype => "multipart/form-data" } do%>
-	select picture: <%= file_field_tag 'photo' %> <br>
+<%= form_tag :save_pic, :enctype =>"multipart/form-data"  do%>
+	select picture: <%= file_field_tag 'photo', :multiple => true %> <br>
 	add line break:  <%= check_box_tag 'line' %> <br>
 	position: <%= radio_button_tag 'side', 1 %>left
 	<%= radio_button_tag 'side', 2 %>center
 	<%= radio_button_tag 'side', 3 %>right
+	<br>
+	image size: <%= radio_button_tag 'def_size', 1 %>small
+	<%= radio_button_tag 'def_size', 2 %>medium
+	<%= radio_button_tag 'def_size', 3 %>large
+	<br>
+	short description: <%= text_field_tag 'description', @picture.description %>
+	show decription: <%= check_box_tag 'show_desc' %><br>
+	<%= submit_tag("Save Changes") %>
 <% end %>

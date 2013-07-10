@@ -6,6 +6,9 @@ class CreateDocuments < ActiveRecord::Migration
     	t.string :title
     	t.string :url
     	t.integer :page_id
+      t.string :description
+      t.integer :show_desc
+      t.integer :indent
       	t.timestamps
     end
   end
