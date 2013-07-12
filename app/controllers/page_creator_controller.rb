@@ -9,6 +9,7 @@ class PageCreatorController < ApplicationController
 	def save_new
 		@page = Page.new(params[:page])
 		@page.save
+
 		session[:page_id] = @page.id
 		redirect_to :edit_page
 
@@ -233,7 +234,7 @@ class PageCreatorController < ApplicationController
 		content = passages+videos+docs+pics
 
 		session[:content] = content
-		redirect_to :edit_document
+		redirect_to :edit_video
 	end	
 
 	def edit_video
@@ -328,5 +329,10 @@ class PageCreatorController < ApplicationController
 		session[:move_to] = nil
 
 		redirect_to :edit_page
+	end
+
+	def show
+		session[:page_id] = nil
+		@pages = Page.where(user_id: current_user.id)
 	end
 end

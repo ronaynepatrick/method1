@@ -1,0 +1,6 @@
+<% @pages.each do |p| %>
+	<%= form_tag :edit_page do %>
+		<%= hidden_field_tag :page_id, p.id  %>
+		<input type="submit" value=<%= p.title %> style="border:none;background:none; cursor:pointer;color:blue">
+	<% end %>
+<% end %>

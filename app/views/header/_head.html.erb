@@ -4,14 +4,23 @@
     <!-- Left Nav Section -->
     <ul class="left">
     	<li class="has-form">
-        <%= form_tag "search" do %>
+        <%= form_tag "search", {:class => "custom"} do %>
           <div class="row collapse">
-            <div class="small-8 columns">
-              <input id="search_q" type="text">
+            <div class="small-7 columns">
+              <input id="search_q" type="text" name="search_q">
             </div>
-            <div class="small-4 columns">
-              <!--<a href="#" class="alert button">Search</a>-->
+            <div class="small-2 columns">
+               <!--<a href="#" class="alert button">Search</a>-->
               <div class = "alert"><%= submit_tag("Search") %></div>
+            </div>
+            <div class="small-2 columns">
+               <select style="" name="stype" id="search_option" class="medium">
+                  <option value = "0">all</option>
+                  <option value = "1">pages</option>
+                  <option value = "2">page id</option>
+                  <option value = "3">videos</option>
+                  <option value = "4">picture</option>
+                </select>
             </div>
           </div>
         <% end %>

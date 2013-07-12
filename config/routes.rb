@@ -42,9 +42,13 @@ Method1::Application.routes.draw do
   match 'edit_video' => "page_creator#edit_video", :as => :edit_video
   match 'save_video' => "page_creator#save_video", :as => :save_video
   match "delete_video" => "page_creator#delete_video", :as => :delete_video
+  match "edit_pages" => "page_creator#show", :as => :edit_pages
+
+
 
   #other links
   get 'pics/:id', to: "image#show", as: "pic"
+  get 'pages/:id', to: "page#show", as: "page"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

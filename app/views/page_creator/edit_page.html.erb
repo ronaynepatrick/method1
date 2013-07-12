@@ -24,8 +24,8 @@ page ID: <%= @page.id %><br>
 		<%= submit_tag("Add Document") %>
 	<% end %>
 	<%= form_tag :new_video do %>
-		<%= hidden_field_tag :current_position, size %>
-		<%= hidden_field_tag :move_to, c.position+1 %>
+		<%= hidden_field_tag :current_position, $i %>
+		<%= hidden_field_tag :move_to, 0 %>
 		<%= submit_tag("Add Video") %>
 	<% end %>
 	
