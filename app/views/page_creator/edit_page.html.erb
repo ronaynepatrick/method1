@@ -149,10 +149,13 @@ page ID: <%= @page.id %><br>
 				<%= render partial: "buttons", locals: {c: c, size: @content.to_a.count} %>
 
 			<% elsif c.class.name == "Video" %>
+				<% if c.linebreak %>
+					<HR SIZE="2">
+				<% end %>
+
 				<div style="margin: 0 auto;width:640px;height:480px;">
 					<video src=<%= c.vid.url %> width="640" height="480"></video>
 					<% if c.show_desc %>
-						<br>
 						<div style="font-style:italic"><%= c.description %></div>
 					<% end %>
 				</div>

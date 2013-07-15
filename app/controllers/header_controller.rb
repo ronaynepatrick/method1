@@ -4,14 +4,13 @@ class HeaderController < ApplicationController
 		# @pages = Page.find(19)
 		case stype
 		when "0"
+
+		when "1"
 			if params[:search_q] == ""
 				@pages = Page.all
 			else
 				
 			end
-
-		when "1"
-
 		when "2"
 
 		when "3"
